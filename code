@@ -1,0 +1,62 @@
+int sensor_1 = 3;
+int sensor_2 = 4;
+int sensor_3 = 5;
+int audio_1 = 10;
+int audio_2 = 11;
+int audio_3 = 12;
+int giatri_1;
+int giatri_2;
+int giatri_3;
+void Mode_1(){
+  digitalWrite(audio_1, HIGH);
+  
+}
+void Mode_2(){
+  digitalWrite(audio_2, HIGH);
+ 
+}
+void Mode_3(){
+  digitalWrite(audio_3, HIGH);
+ 
+}
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(sensor_1,INPUT);
+  pinMode(sensor_2,INPUT);
+  pinMode(sensor_3,INPUT);
+  pinMode(audio_1,OUTPUT);
+  pinMode(audio_2,OUTPUT);
+  pinMode(audio_3, OUTPUT);
+}
+
+void loop()
+{
+  // put your main code here, to run repeatedly:
+  giatri_1 = digitalRead(sensor_1);
+  giatri_2 = digitalRead(sensor_2);
+  giatri_3 = digitalRead(sensor_3);
+  
+  Serial.println(giatri_1);
+  if(giatri_1 == 1){
+    if(giatri_2 == 1){
+      delay(5000);
+      if(giatri_2 == 1){
+        Mode_3();
+      }
+    }
+  }
+  if(giatri_1 == 0){
+    delay(300);
+    if(giatri_2 == 0){
+      Mode_1();
+    }
+  }
+  if(giatri_3 == 0){
+    delay(300);
+    if(giatri_3 == 0){
+      Mode_2();
+    }
+  }
+}
+
